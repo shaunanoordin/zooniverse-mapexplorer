@@ -15,11 +15,10 @@ export default class App extends React.Component {
       <div>
         <header className="site-header">
           <h1 className="title">React Starterify {version}</h1>
-          <Link to="/about" className="link">About</Link>
-          <Link to="/poweredby" className="link">Powered by</Link>
+          <Link to="/map-1" className="link">Map-1</Link>
         </header>
         <section className="content-section">
-          {this.props.children || 'Welcome to React Starterify'}
+          {this.props.children || 'Map map maps!'}
         </section>
       </div>
     );
