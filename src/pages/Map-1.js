@@ -1,27 +1,34 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import L from 'leaflet';
+import Explanation from './Map-1-Explanation';
 
-export default class About extends React.Component {
+export default class Map1 extends React.Component {
   componentDidMount() {
-    var map = this.map = L.map(React.findDOMNode(this), {
-      minZoom: 2,
-      maxZoom: 20,
+    this.initialiseMap();
+  }
+  
+  initialiseMap() {
+    const map = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), {
+      center: [51.7520, -1.2577],
+      zoom: 12,
       layers: [
-      L.tileLayer(
-      'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      {attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})
+        L.tileLayer(
+          '//{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png',
+          { attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' }
+        )
       ],
-      attributionControl: false,
+      attributionControl: true,
     });
-
-    map.fitWorld();
   }
   
   render() {
-    console.log(L);
-
     return (
-      <div className="map"></div>
+      <div ref="map" className="map">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+        <div ref="mapVisuals" className="map-visuals"></div>
+        <Explanation />
+      </div>
     );
   }
 }
