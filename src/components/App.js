@@ -16,6 +16,7 @@ export default class App extends React.Component {
         <header className="site-header">
           <h1 className="title">Maps {version}</h1>
           <Link to="/map-1" className="link">Map-1</Link>
+          <Link to="/map-1a" className="link">Map-1A</Link>
         </header>
         <section className="content-section">
           {this.props.children || 'Map map maps!'}

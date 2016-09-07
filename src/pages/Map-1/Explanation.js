@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import L from 'leaflet';
 
-export default class Map1Explanation extends React.Component {
+export default class Explanation extends React.Component {
   render() {
     return (
       <div className="map-explanation">
@@ -49,7 +49,7 @@ export default class Map1Explanation extends React.Component {
           &nbsp;{'}'}
         </code>
         <p>You'll want to add the Leaflet Map on <b>componentDidMount(),</b> as the L.Map() function needs to wait until the container is rendered first.</p>
-        <p>The "center" and "zoom" properties are self explanatory. 51.7520° N, 1.2577° W are the coordinates for Oxford, UK - hello there, old chap!</p>
+        <p>The "center" and "zoom" properties are self explanatory. 51.7520&deg; N, 1.2577&deg; W are the coordinates for Oxford, UK - hello there, old chap!</p>
         <p>The "layers" (or more accurately, the "tile layers") may require some explanation: this is the "base map" that visualises the geography that we're interested at. In this instance, we are using a free base map from OpenStreetMaps.</p>
         <p>You can actually stack multiple tile layers on top of each other, and even use custom tile layers, but let's not get ahead of ourselves.</p>
         <p>And that's it for a simple map!</p>
