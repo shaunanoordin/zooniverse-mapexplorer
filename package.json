@@ -1,24 +1,14 @@
 {
-  "name": "react-starterify",
-  "version": "2.0.0",
-  "description": "React JS application skeleton using Wepback and other awesome tools",
+  "name": "zooniverse-mapexplorer",
+  "version": "1.0.0",
+  "description": "Let's make maps using React and Leaflet. Based on zooniverse/react-starterify",
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zooniverse/zoo-react-starterify"
+    "url": "https://github.com/shaunanoordin/zooniverse-mapexplorer"
   },
   "keywords": [
-    "wepback",
-    "react",
-    "wepback",
-    "seed",
-    "boilerplate",
-    "kickstarter",
-    "ES6",
-    "ES2015",
-    "babel",
-    "mocha",
-    "chai"
+    "maps"
   ],
   "scripts": {
     "start": "babel-node server.js",
@@ -36,7 +26,10 @@
     "history": "^1.13.1",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-router": "1.0.0-rc3"
+    "react-router": "1.0.0-rc3",
+    
+    "leaflet": "0.7.7",
+    "react-leaflet": "0.12.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.0",
