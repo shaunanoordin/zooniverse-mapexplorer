@@ -5,10 +5,6 @@ import Explanation from './Map-1-Explanation';
 
 export default class Map1 extends React.Component {
   componentDidMount() {
-    this.initialiseMap();
-  }
-  
-  initialiseMap() {
     const map = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), {
       center: [51.7520, -1.2577],
       zoom: 12,
@@ -24,7 +20,7 @@ export default class Map1 extends React.Component {
   
   render() {
     return (
-      <div ref="map" className="map">
+      <div className="map">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
         <div ref="mapVisuals" className="map-visuals"></div>
         <Explanation />
