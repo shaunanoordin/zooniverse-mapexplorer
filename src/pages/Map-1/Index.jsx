@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import L from 'leaflet';
-import Explanation from './Map-1-Explanation';
+import Explanation from './Explanation.jsx';
 
-export default class Map1 extends React.Component {
+export default class Index extends React.Component {
   componentDidMount() {
     const map = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), {
       center: [51.7520, -1.2577],
