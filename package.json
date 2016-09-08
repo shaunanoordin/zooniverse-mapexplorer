@@ -29,7 +29,8 @@
     "react-router": "1.0.0-rc3",
     
     "leaflet": "0.7.7",
-    "react-leaflet": "0.12.1"
+    "react-leaflet": "0.12.1",
+    "react-markdown-to-html": "1.0.11"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.0",

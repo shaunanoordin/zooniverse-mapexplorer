@@ -16,7 +16,6 @@ export default class Index extends React.Component {
     ReactDOM.render(map, ReactDOM.findDOMNode(this.refs.mapVisuals));
   }
   
-  
   render() {
     return (
       <div className="map">
