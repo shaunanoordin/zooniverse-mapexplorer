@@ -26,7 +26,7 @@ export default class App extends React.Component {
               <ul>
                 <li><Link to="/map-1" className="link">Map 1:</Link> Create Simple Leaflet+React Map</li>
                 <li><Link to="/map-1a" className="link">Map 1A:</Link> Create Simple Leaflet+React Map (alternate ver using <code>react-leaflet</code>)</li>
-                <li><Link to="/map-2" className="link">Map 2:</Link> Adding more data tile and data layers</li>
+                <li><Link to="/map-2" className="link">Map 2:</Link> Add Data Layers</li>
               </ul>
             </div>
           }
