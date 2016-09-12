@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import L from 'leaflet';
 import Explanation from './Explanation.jsx';
+const gorongosaGeoJSON = require('./gorongosa.json');
 
 export default class Index extends React.Component {
   componentDidMount() {
     const myMap = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), {
-      center: [51.7520, -1.2577],
-      zoom: 12,
+      center: [-18.8, 34.4],
+      zoom: 9,
       layers: [
         L.tileLayer(
           '//{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png',
@@ -16,6 +17,18 @@ export default class Index extends React.Component {
       ],
       attributionControl: true,
     });
+    
+    const gorongosaOptions = {
+      style: {
+        color: '#fc3',
+        opacity: 1,
+        fillOpacity: 0,
+        clickable: false,
+        weight: 5
+      }
+    };
+    const gorongosaLayer = L.geoJson(gorongosaGeoJSON, gorongosaOptions);
+    gorongosaLayer.addTo(myMap);
   }
   
   render() {

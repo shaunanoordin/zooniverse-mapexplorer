@@ -33,7 +33,7 @@ export default class Explanation extends React.Component {
         <code dangerouslySetInnerHTML={{__html:
           'Map1 React.Component: \n' +
           '  componentDidMount() { \n' +
-          '    const map = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), { \n' +
+          '    const myMap = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), { \n' +
           '    center: [51.7520, -1.2577], \n' +
           '    zoom: 12, \n' +
           '    layers: [ \n' +

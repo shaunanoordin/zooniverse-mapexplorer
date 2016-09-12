@@ -5,7 +5,7 @@ import Explanation from './Explanation.jsx';
 
 export default class Index extends React.Component {
   componentDidMount() {
-    const map = (
+    const myMap = (
       <Map center={[51.7520, -1.2577]} zoom={12}>
         <TileLayer
           url="//{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png"
@@ -13,7 +13,7 @@ export default class Index extends React.Component {
         />
       </Map>
     );
-    ReactDOM.render(map, ReactDOM.findDOMNode(this.refs.mapVisuals));
+    ReactDOM.render(myMap, ReactDOM.findDOMNode(this.refs.mapVisuals));
   }
   
   render() {
