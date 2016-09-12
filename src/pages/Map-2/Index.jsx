@@ -8,7 +8,7 @@ export default class Index extends React.Component {
   componentDidMount() {
     const myMap = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), {
       center: [-18.8, 34.4],
-      zoom: 10,
+      zoom: 9,
       layers: [
         L.tileLayer(
           '//{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png',
