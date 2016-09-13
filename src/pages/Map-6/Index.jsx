@@ -6,7 +6,21 @@ const gorongosaGeoJSON = require('./gorongosa.json');
 const vegetationGeoJSON = require('./vegetation.json');
 
 export default class Index extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      range: 10,
+    };
+  }
+  
   componentDidMount() {
+    if (this.myMap) {
+      console.log('componentDidMount(): map already created.');
+      return;
+    } else {
+      console.log('componentDidMount(): creating map.');
+    }
+    
     //Base Layers
     const topographyLayer = L.tileLayer(
       '//{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png',
@@ -18,7 +32,7 @@ export default class Index extends React.Component {
     );
     
     //Leaflet Map
-    const myMap = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), {
+    this.myMap = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), {
       center: [-18.8, 34.4],
       zoom: 9,
       layers: [
@@ -29,12 +43,13 @@ export default class Index extends React.Component {
     
     //Data Layer: Vegetation/Biomes
     const vegetationOptions = {
-      style: function (feature) {
+      style: (feature) => {
         const baseStyle = {
           color: '#000',
           opacity: 0,
           fillOpacity: 0.5,
-          clickable: false,
+          clickable: true,
+          pointer: 'cursor',
           weight: 0,
         };
         
@@ -54,10 +69,16 @@ export default class Index extends React.Component {
         return (specificStyles[featureName])
           ? Object.assign(baseStyle, specificStyles[featureName])
           : baseStyle;
+      },
+      
+      onEachFeature: (feature, layer) => {
+        layer.on('click', (e) => {
+          alert('Vegetation/Biome: ' + feature.properties.NAME);
+        });     
       }
     };
     const vegetationLayer = L.geoJson(vegetationGeoJSON, vegetationOptions);
-    vegetationLayer.addTo(myMap);
+    vegetationLayer.addTo(this.myMap);
     
     //Data Layer: Gorongosa National Park Borders
     const gorongosaOptions = {
@@ -70,7 +91,7 @@ export default class Index extends React.Component {
       }
     };
     const gorongosaLayer = L.geoJson(gorongosaGeoJSON, gorongosaOptions);
-    gorongosaLayer.addTo(myMap);
+    gorongosaLayer.addTo(this.myMap);
     
     //Layer Controls
     const baseLayers = {
@@ -86,16 +107,29 @@ export default class Index extends React.Component {
       collapsed: false,
     };
     const layerControls = L.control.layers(baseLayers, dataLayers, layerControlsOptions);
-    layerControls.addTo(myMap);
+    layerControls.addTo(this.myMap);
   }
   
   render() {
+    console.log('render()');
     return (
       <div className="map">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
         <div ref="mapVisuals" className="map-visuals"></div>
+        <div ref="mapControls" className="map-controls">
+          <label>
+            <span>Range</span>
+            <input ref="range" type="range" onChange={this.updateRange.bind(this)} min={0} max={100} value={this.state.range} />
+          </label>
+        </div>
         <Explanation />
       </div>
     );
+  }
+  
+  updateRange() {
+    this.setState({
+      range: this.refs.range.value
+    });
   }
 }

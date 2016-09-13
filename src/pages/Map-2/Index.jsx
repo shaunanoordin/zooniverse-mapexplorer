@@ -34,7 +34,7 @@ export default class Index extends React.Component {
   render() {
     return (
       <div className="map">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
         <div ref="mapVisuals" className="map-visuals"></div>
         <Explanation />
       </div>
