@@ -22,10 +22,49 @@ export default class Index extends React.Component {
       center: [-18.8, 34.4],
       zoom: 9,
       layers: [
-        satelliteLayer
+        topographyLayer
       ],
       attributionControl: true,
     });
+    
+    //Data Layer: Vegetation/Biomes
+    const vegetationOptions = {
+      style: (feature) => {
+        const baseStyle = {
+          color: '#000',
+          opacity: 0,
+          fillOpacity: 0.5,
+          clickable: true,
+          pointer: 'cursor',
+          weight: 0,
+        };
+        
+        const featureName = feature.properties.NAME;
+        const specificStyles = {
+          'Miombo Woodland': { color: '#063' },
+          'Mixed Savanna and Woodland': { color: '#693' },
+          'Floodplain Grassland': { color: '#3c9' },
+          'Limestone Gorges': { color: '#cc0' },
+          'Montane Woodland': { color: '#c3c' },
+          'Montane Forest': { color: '#606' },
+          'Montane Grassland': { color: '#30c' },
+          'Lake Urema': { color: '#0ff' },
+          'Inselberg': { color: '#f30' },
+        };
+        
+        return (specificStyles[featureName])
+          ? Object.assign(baseStyle, specificStyles[featureName])
+          : baseStyle;
+      },
+      
+      onEachFeature: (feature, layer) => {
+        layer.on('click', (e) => {
+          alert('Vegetation/Biome: ' + feature.properties.NAME);
+        });     
+      }
+    };
+    const vegetationLayer = L.geoJson(vegetationGeoJSON, vegetationOptions);
+    vegetationLayer.addTo(myMap);
     
     //Data Layer: Gorongosa National Park Borders
     const gorongosaOptions = {
@@ -39,19 +78,6 @@ export default class Index extends React.Component {
     };
     const gorongosaLayer = L.geoJson(gorongosaGeoJSON, gorongosaOptions);
     gorongosaLayer.addTo(myMap);
-    
-    //Data Layer: Vegetation/Biomes
-    const vegetationOptions = {
-      style: {
-        color: '#9c3',
-        opacity: 1,
-        fillOpacity: 0,
-        clickable: false,
-        weight: 1,
-      }
-    };
-    const vegetationLayer = L.geoJson(vegetationGeoJSON, vegetationOptions);
-    vegetationLayer.addTo(myMap);
     
     //Layer Controls
     const baseLayers = {

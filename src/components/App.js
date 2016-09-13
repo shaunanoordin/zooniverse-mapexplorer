@@ -29,6 +29,7 @@ export default class App extends React.Component {
                 <li><Link to="/map-2" className="link">Map 2:</Link> Add Data Layers</li>
                 <li><Link to="/map-3" className="link">Map 3:</Link> Add Multiple Layers</li>
                 <li><Link to="/map-4" className="link">Map 4:</Link> Create Dynamic Layer Styles</li>
+                <li><Link to="/map-5" className="link">Map 5:</Link> Create Interactive Layers</li>
               </ul>
             </div>
           }

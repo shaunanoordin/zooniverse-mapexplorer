@@ -55,7 +55,7 @@ export default class Index extends React.Component {
           ? Object.assign(baseStyle, specificStyles[featureName])
           : baseStyle;
       }
-    }
+    };
     const vegetationLayer = L.geoJson(vegetationGeoJSON, vegetationOptions);
     vegetationLayer.addTo(myMap);
     
@@ -76,15 +76,15 @@ export default class Index extends React.Component {
     const baseLayers = {
       'Satellite': satelliteLayer,
       'Topography': topographyLayer,
-    }
+    };
     const dataLayers = {
       'Gorongosa National Park': gorongosaLayer,
       'Vegetation/Biomes': vegetationLayer,
-    }
+    };
     const layerControlsOptions = {
       position: 'topright',
       collapsed: false,
-    }
+    };
     const layerControls = L.control.layers(baseLayers, dataLayers, layerControlsOptions);
     layerControls.addTo(myMap);
   }
