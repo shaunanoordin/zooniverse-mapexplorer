@@ -4,22 +4,23 @@ import L from 'leaflet';
 import Explanation from './Explanation.jsx';
 const gorongosaGeoJSON = require('./gorongosa.json');
 const vegetationGeoJSON = require('./vegetation.json');
+import CameraDatabase from './camera-database.js';
+
+const IS_IE = 'ActiveXObject' in window;  //IE11 detection
 
 export default class Index extends React.Component {
   constructor() {
     super();
     this.state = {
-      range: 10,
+      camera_limestone: true,
+      camera_floodplain: true,
+      camera_miombo: true,
+      camera_savanna: true,
     };
   }
   
   componentDidMount() {
-    if (this.myMap) {
-      console.log('componentDidMount(): map already created.');
-      return;
-    } else {
-      console.log('componentDidMount(): creating map.');
-    }
+    console.log('componentDidMount(): creating map.');
     
     //Base Layers
     const topographyLayer = L.tileLayer(
@@ -32,9 +33,9 @@ export default class Index extends React.Component {
     );
     
     //Leaflet Map
-    this.myMap = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), {
-      center: [-18.8, 34.4],
-      zoom: 9,
+    const myMap = L.map(ReactDOM.findDOMNode(this.refs.mapVisuals), {
+      center: [-18.8, 34.5],
+      zoom: 10,
       layers: [
         topographyLayer
       ],
@@ -74,11 +75,11 @@ export default class Index extends React.Component {
       onEachFeature: (feature, layer) => {
         layer.on('click', (e) => {
           alert('Vegetation/Biome: ' + feature.properties.NAME);
-        });     
+        });
       }
     };
     const vegetationLayer = L.geoJson(vegetationGeoJSON, vegetationOptions);
-    vegetationLayer.addTo(this.myMap);
+    vegetationLayer.addTo(myMap);
     
     //Data Layer: Gorongosa National Park Borders
     const gorongosaOptions = {
@@ -91,7 +92,39 @@ export default class Index extends React.Component {
       }
     };
     const gorongosaLayer = L.geoJson(gorongosaGeoJSON, gorongosaOptions);
-    gorongosaLayer.addTo(this.myMap);
+    gorongosaLayer.addTo(myMap);
+    
+    //Data Layer: Cameras
+    const cameraOptions = {
+      pointToLayer: (feature, latlng) => {
+        const vegetationColours = {
+          'Limestone Gorge': '#903',
+          'Floodplain Grassland': '#06c',
+          'Miombo Woodland': '#f66',
+          'Mixed Savanna and Woodland': '#c93',
+        };
+        const marker = L.circleMarker(latlng, {
+          color: '#fff',
+          weight: 2,
+          fillColor: vegetationColours[feature.properties.veg_type],
+          fillOpacity: 0.8,
+          radius: 6,
+        });
+        marker.on('click', (e) => {
+          alert(
+            'Marker: ' + marker.feature.properties.id + '\n' +
+            'Biome: ' + marker.feature.properties.veg_type + '\n' +
+            'Humans: ' + marker.feature.properties.human_type + ' (' + marker.feature.properties.dist_humans_m + 'm away) \n' +
+            'Water: ' + marker.feature.properties.water_type + ' (' + marker.feature.properties.dist_water_m + 'm away)'
+          );
+        });
+        return marker;
+      }
+    };
+    const cameraLayer = L.geoJson(null, cameraOptions);
+    cameraLayer.addTo(myMap);
+    this.cameraLayer = cameraLayer;
+    this.updateCameraLayer();
     
     //Layer Controls
     const baseLayers = {
@@ -99,6 +132,7 @@ export default class Index extends React.Component {
       'Topography': topographyLayer,
     };
     const dataLayers = {
+      'Cameras': cameraLayer,
       'Gorongosa National Park': gorongosaLayer,
       'Vegetation/Biomes': vegetationLayer,
     };
@@ -107,7 +141,7 @@ export default class Index extends React.Component {
       collapsed: false,
     };
     const layerControls = L.control.layers(baseLayers, dataLayers, layerControlsOptions);
-    layerControls.addTo(this.myMap);
+    layerControls.addTo(myMap);
   }
   
   render() {
@@ -118,8 +152,32 @@ export default class Index extends React.Component {
         <div ref="mapVisuals" className="map-visuals"></div>
         <div ref="mapControls" className="map-controls">
           <label>
-            <span>Range</span>
-            <input ref="range" type="range" onChange={this.updateRange.bind(this)} min={0} max={100} value={this.state.range} />
+            <input
+              type="checkbox" onChange={this.updateCameraLayer.bind(this)}
+              ref="camera_limestone"
+              checked={this.state.camera_limestone} />
+            <span>Limestone Gorge</span>
+          </label>
+          <label>
+            <input
+              type="checkbox" onChange={this.updateCameraLayer.bind(this)}
+              ref="camera_floodplain"
+              checked={this.state.camera_floodplain} />
+            <span>Floodplain Grassland</span>
+          </label>
+          <label>
+            <input
+              type="checkbox" onChange={this.updateCameraLayer.bind(this)}
+              ref="camera_miombo"
+              checked={this.state.camera_miombo} />
+            <span>Miombo Woodland</span>
+          </label>
+          <label>
+            <input
+              type="checkbox" onChange={this.updateCameraLayer.bind(this)}
+              ref="camera_savanna"
+              checked={this.state.camera_savanna} />
+            <span>Mixed Savanna and Woodland</span>
           </label>
         </div>
         <Explanation />
@@ -127,9 +185,22 @@ export default class Index extends React.Component {
     );
   }
   
-  updateRange() {
+  updateCameraLayer() {
+    const camera_limestone = this.refs.camera_limestone.checked;
+    const camera_floodplain = this.refs.camera_floodplain.checked;
+    const camera_miombo = this.refs.camera_miombo.checked;
+    const camera_savanna = this.refs.camera_savanna.checked;
+    
+    //Update the camera layer.
+    this.cameraLayer.clearLayers();
+    this.cameraLayer.addData(CameraDatabase.getGeoJSON(camera_limestone, camera_floodplain, camera_miombo, camera_savanna));
+    
+    //Update State and make the component re-render.
     this.setState({
-      range: this.refs.range.value
+      camera_limestone,
+      camera_floodplain,
+      camera_miombo,
+      camera_savanna,
     });
   }
 }
