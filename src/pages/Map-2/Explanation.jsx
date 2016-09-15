@@ -39,7 +39,7 @@ export default class Explanation extends React.Component {
         <p><b>Q:</b> Where do you get GeoJSON data?</p>
         <p><b>A:</b> This kind of geographical data is usually specific to your project, so ask your partners/clients/government agencies.</p>
         <p><b>Q:</b> What if the partners/clients/government agencies have geographical data, but not in GeoJSON format?</p>
-        <p><b>A:</b> See "Further Information, below.</p>
+        <p><b>A:</b> See "Further Information", below.</p>
         <p><b>Q:</b> What if I plugged in some GeoJSON data but don't see it appear anywhere on the Leaflet map?</p>
         <p><b>A:</b> Did you check that it's using the correct CRS for your map? Here's a tip: Try opening your geo data file(s) in a dedicated mapping app, e.g. QGIS, to see that it's valid.</p>
         <h2>Further Information</h2>

@@ -22,7 +22,7 @@ export default class Explanation extends React.Component {
           '  render() { \n' +
           '    return ( \n' +
           '      &lt;div className="map"&gt; \n' +
-          '        &lt;link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" /&gt; <span class="comments">//Be sure to check the Leaflet website for the latest CSS file.</span> \n' +
+          '        &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" /&gt; <span class="comments">//Be sure to check the Leaflet website for the latest CSS file.</span> \n' +
           '        &lt;div ref="mapVisuals" className="map-visuals"&gt;&lt;/div&gt; <span class="comments">//I\'ll use "mapVisuals" as the Leaflet container.</span> \n' +
           '      &lt;/div&gt; \n' +
           '    ); \n' +
