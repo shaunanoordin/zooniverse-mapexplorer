@@ -21,7 +21,7 @@ export default class App extends React.Component {
             this.props.children ||
             <div className="index">
               <h1>Index</h1>
-              <p>This is a guide for creating maps using Leaflet and Redux</p>
+              <p>This is a guide for creating maps using Leaflet and Redux.</p>
               <ul>
                 <li><Link to="/map-1" className="link">Map 1:</Link> Create Simple Leaflet+React Map</li>
                 <li><Link to="/map-1a" className="link">Map 1A:</Link> Create Simple Leaflet+React Map (alternate ver using <code>react-leaflet</code>)</li>
@@ -31,6 +31,9 @@ export default class App extends React.Component {
                 <li><Link to="/map-5" className="link">Map 5:</Link> Create Interactive Layers</li>
                 <li><Link to="/map-6" className="link">Map 6:</Link> Add Interactive, Dynamic Data Markers</li>
               </ul>
+              <p>Each Map is built upon the previous Map, adding new features along the way.</p>
+              <h2>Source Code</h2>
+              <p><a href="https://github.com/shaunanoordin/zooniverse-mapexplorer">https://github.com/shaunanoordin/zooniverse-mapexplorer</a></p>
             </div>
           }
         </section>
