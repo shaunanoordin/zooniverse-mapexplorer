@@ -19,9 +19,9 @@
   "author": "Zooniverse",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/zooniverse/zoo-react-starterify"
+    "url": "https://github.com/shaunanoordin/zooniverse-mapexplorer"
   },
-  "homepage": "https://github.com/zooniverse/zoo-react-starterify",
+  "homepage": "https://github.com/shaunanoordin/zooniverse-mapexplorer",
   "dependencies": {
     "history": "^1.13.1",
     "react": "^0.14.0",
