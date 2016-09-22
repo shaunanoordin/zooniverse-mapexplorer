@@ -30,6 +30,7 @@ export default class App extends React.Component {
                 <li><Link to="/map-4" className="link">Map 4:</Link> Create Dynamic Layer Styles</li>
                 <li><Link to="/map-5" className="link">Map 5:</Link> Create Interactive Layers</li>
                 <li><Link to="/map-6" className="link">Map 6:</Link> Add Interactive, Dynamic Data Markers</li>
+                <li><Link to="/map-7" className="link">Map 7:</Link> Add a "Recentre Map" Button</li>
               </ul>
               <p>Each Map is built upon the previous Map, adding new features along the way.</p>
               <h2>Source Code</h2>
