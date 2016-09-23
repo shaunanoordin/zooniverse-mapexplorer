@@ -7,11 +7,11 @@ export default class Explanation extends React.Component {
         <h1>Adding a "Recentre Map" Button</h1>
         <p>Let's add a simple button that recentres the map view. Partly to make navigating the map convenient for users, but mostly to show off custom controls and programmatic actions within the Leaflet Map.</p>
         <h2>Adding the 'Control'</h2>
-        <p>What we're adding is adding a generic control, so we use <b>L.control()</b></p>
+        <p>What we're doing is adding a generic control, so we use <b>L.control()</b></p>
         <code dangerouslySetInnerHTML={{__html:
           'const recentreButton = L.control({position: \'topleft\'});'
         }}/>
-        <p>The trick is how we define the control. This is done on the the control's <b>.onAdd()</b> function, which we need to define to return our "Recentre Map" button.</p>
+        <p>The trick is how we define the button; this is done in the the control's <b>.onAdd()</b> function.</p>
         <code dangerouslySetInnerHTML={{__html:
           'recentreButton.onAdd = (map) => { \n' +
           '  const button = L.DomUtil.create(\'button\', \'btn fa fa-crosshairs\'); \n' +
