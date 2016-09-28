@@ -35,21 +35,8 @@ export default class Index extends React.Component {
     });
     
     //Data Layer: Cameras
-    const dataOptions = {
-      pointToLayer: (feature, latlng) => {
-        const marker = L.circleMarker(latlng, {
-          color: '#fff',
-          weight: 2,
-          fillColor: '#c33',
-          fillOpacity: 0.8,
-          radius: 6,
-        });
-        return marker;
-      }
-    };
-    const dataLayer = L.geoJson(null, dataOptions);
-    dataLayer.addTo(this.myMap);
-    this.dataLayer = dataLayer;
+    this.dataLayer = L.geoJson(null, {});
+    this.dataLayer.addTo(this.myMap);
     this.updateDataLayer();
     
     //Layer Controls
@@ -58,7 +45,7 @@ export default class Index extends React.Component {
       'Topography': topographyLayer,
     };
     const dataLayers = {
-      'Data': dataLayer,
+      'My Position': this.dataLayer,
     };
     const layerControlsOptions = {
       position: 'topright',
@@ -69,6 +56,10 @@ export default class Index extends React.Component {
     
     //Update Cycle
     this.runCycle = setInterval(this.run.bind(this), 1000);
+  }
+  
+  componentWillUnmount() {
+    clearInterval(this.runCycle);
   }
   
   render() {
@@ -110,10 +101,8 @@ export default class Index extends React.Component {
     const circle = L.circle([this.state.myLat, this.state.myLng], 20, {
         color: '#fff',
         weight: 2,
-        fillColor: '#c33',
+        fillColor: '#ea5',
         fillOpacity: 0.9,
-        fillColor: '#c33',
-        fillOpacity: 0.8,
     }).addTo(this.dataLayer);
   };
 }
