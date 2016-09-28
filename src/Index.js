@@ -10,6 +10,7 @@ import Map4 from './pages/Map-4/Index';
 import Map5 from './pages/Map-5/Index';
 import Map6 from './pages/Map-6/Index';
 import Map7 from './pages/Map-7/Index';
+import Map8 from './pages/Map-8/Index';
 
 // Todo: let's find a better way to include Styles,
 // currently Styles looks like an unused var to eslint
@@ -29,6 +30,7 @@ ReactDOM.render(
       <Route path="/map-5" component={Map5}/>
       <Route path="/map-6" component={Map6}/>
       <Route path="/map-7" component={Map7}/>
+      <Route path="/map-8" component={Map8}/>
     </Route>
   </Router>
   , document.getElementById('root')
